@@ -45,12 +45,12 @@ class Descriptor():
 
 
     def add_file(self, path, starting_addr):
-        # TODO: Check if filename and path are valid
+        # TODO Check if filename and path are valid
         self.index[path] = starting_addr
 
 
     def add_directory(self, path):
-        # TODO: Check if dirname and path are valid
+        # TODO Check if dirname and path are valid
         self.index[path] = None
 
 
@@ -59,6 +59,12 @@ class Descriptor():
             raise Exception("This file does not exist.")
         
         del self.index[path]
+
+
+    def move_file(self, source_filename, target_filename):
+        # TODO Check if source and target are valid
+        self.index[target_filename] = self.index[source_filename]
+        del self.index[source_filename]
 
 
     def get_address(self, path):

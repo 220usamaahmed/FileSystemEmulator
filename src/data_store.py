@@ -31,11 +31,14 @@ class DataStore:
 
     def generate_block_sequnce(self, data):
         block_sequnce = []
-        for i in range(0, len(data), config.USABLE_BLOCK_SIZE):
-            block = Block.new(data[i:i+config.USABLE_BLOCK_SIZE])
-            if i < len(data) - config.USABLE_BLOCK_SIZE:
-                block.set_next_block(self.descriptor.get_empty_block())
-            block_sequnce.append(block)
+        if len(data):
+            for i in range(0, len(data), config.USABLE_BLOCK_SIZE):
+                block = Block.new(data[i:i+config.USABLE_BLOCK_SIZE])
+                if i < len(data) - config.USABLE_BLOCK_SIZE:
+                    block.set_next_block(self.descriptor.get_empty_block())
+                block_sequnce.append(block)
+        else:
+            block_sequnce.append(Block.new(b""))
 
         return block_sequnce
 
@@ -77,13 +80,6 @@ class DataStore:
         # Save new block sequnce starting by overwriting that old starting block
         block_sequnce = self.generate_block_sequnce(data)
         self.save_block_sequence(block_sequnce, starting_addr)
-        
-
-
-    def merge_data(block_sequnce):
-        data = b""
-        for block in block_sequnce: data += block.get_data()
-        return data
 
 
     def load_descriptor(self):
@@ -110,7 +106,6 @@ class DataStore:
 
 
     def read_file(self, path):
-        print(self.descriptor.get_address(path))
         block_sequnce = self.load_block_sequnce(self.descriptor.get_address(path))
         return b"".join([block.get_data() for block in block_sequnce])
 
@@ -130,6 +125,10 @@ class DataStore:
         self.replace_block_sequnce(self.descriptor.dump(), 0)
 
 
-    def create_folder(self, path):
+    def move_file(self, source_filename, target_filename):
+        self.descriptor.move_file(source_filename, target_filename)
+
+
+    def create_directory(self, path):
         self.descriptor.add_directory(path)
         self.replace_block_sequnce(self.descriptor.dump(), 0)
