@@ -61,10 +61,10 @@ class Descriptor():
         del self.index[path]
 
 
-    def move_file(self, source_filename, target_filename):
+    def move_file(self, source_filepath, target_filepath):
         # TODO Check if source and target are valid
-        self.index[target_filename] = self.index[source_filename]
-        del self.index[source_filename]
+        self.index[target_filepath] = self.index[source_filepath]
+        del self.index[source_filepath]
 
 
     def get_address(self, path):

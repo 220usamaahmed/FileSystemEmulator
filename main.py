@@ -56,11 +56,11 @@ def main():
         "move": [move, 2],
         "open-file": [open_file, 1],
         "close-file": [close_file, 0],
-        "write-append": [write_append, 1],
-        "write-at": [write_at, 2],
+        "write-append": [write_append, 0],
+        "write-at": [write_at, 0],
         "read": [read, 0],
-        "move-within-file": [move_within_file, 3],
-        "truncate-file": [truncate_file, 1],
+        "move-within-file": [move_within_file, 0],
+        "truncate-file": [truncate_file, 0],
         "show-mem-map": [show_mem_map, 0],
         "exit": [exit, 0]
     }
@@ -106,8 +106,8 @@ def chdir(dirname):
     cwd += "dirname/"
 
 
-def move(source_filename, target_filename):
-    data_store.move_file(source_filename, target_filename)
+def move(source_filepath, target_filepath):
+    data_store.move_file(source_filepath, target_filepath)
 
 
 def open_file(filename):
@@ -121,12 +121,15 @@ def close_file():
     opened_file = None
 
 
-def write_append(text):
+def write_append():
+    text = input("Enter text: ")
     orig_data = data_store.read_file(f"{cwd}{opened_file}")
     data_store.update_file(orig_data + text.encode(), f"{cwd}{opened_file}")
 
 
-def write_at(text, at):
+def write_at():
+    text = input("Enter text: ")
+    at = int(input("Enter start location: "))
     orig_data = data_store.read_file(f"{cwd}{opened_file}").decode()
     data_store.update_file(orig_data[:int(at)] + text.encode(), f"{cwd}{opened_file}")
 
@@ -135,7 +138,10 @@ def read():
     print(data_store.read_file(f"{cwd}{opened_file}").decode())
 
 
-def move_within_file(start, size, target):
+def move_within_file():
+    start = int(input("Enter start location: "))
+    size = int(input("Enter size: "))
+    target = int(input("Enter target location: "))
     orig_data = data_store.read_file(f"{cwd}{opened_file}")
     data_to_move = orig_data[int(start):int(start)+int(size)]
     updated_data = orig_data[:int(target)]
@@ -143,7 +149,8 @@ def move_within_file(start, size, target):
     data_store.update_file(updated_data, f"{cwd}{opened_file}")
 
 
-def truncate_file(max_size):
+def truncate_file():
+    max_size = int(input("Enter max size: "))
     orig_data = data_store.read_file(f"{cwd}{opened_file}")
     data_store.update_file(orig_data[:int(max_size)], f"{cwd}{opened_file}")
 

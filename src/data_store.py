@@ -125,8 +125,8 @@ class DataStore:
         self.replace_block_sequnce(self.descriptor.dump(), 0)
 
 
-    def move_file(self, source_filename, target_filename):
-        self.descriptor.move_file(source_filename, target_filename)
+    def move_file(self, source_filepath, target_filepath):
+        self.descriptor.move_file(source_filepath, target_filepath)
 
 
     def create_directory(self, path):
