@@ -1,0 +1,17 @@
+The following functions are implemented
+
+--- --- --- 
+
+1. help         Provides help, you are viewing this here.
+
+2. create       Create a file in current working directory. It takes one 
+                argument, filename.
+
+3. delete       Deletes a file in the current working directory. It takes one
+                argument, filename.
+4. mkdir        Makes a directory in the current working direcotry. It takes one
+                argument, directory name.
+
+5. chdir        Changes current working directory. Takens one argument which can
+                either be .. to go back one directory or the name of a direcotry
+                in the current working direcotry.

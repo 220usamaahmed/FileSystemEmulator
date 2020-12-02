@@ -1,0 +1,9 @@
+import os
+
+BLOCK_SIZE = 256
+HEADER_BYTE_1 = 1
+HEADER_BYTE_2 = 1
+HEADER_SIZE = HEADER_BYTE_1 + HEADER_BYTE_2
+USABLE_BLOCK_SIZE = BLOCK_SIZE - HEADER_SIZE
+
+DATA_STORE = os.path.join(os.getcwd(), "data_store.ds")
