@@ -122,14 +122,13 @@ def close_file():
 
 
 def write_append(text):
-    orig_text = data_store.read_file(f"{cwd}{opened_file}")
-    data_store.update_file(orig_text + text.encode(), f"{cwd}{opened_file}")
+    orig_data = data_store.read_file(f"{cwd}{opened_file}")
+    data_store.update_file(orig_data + text.encode(), f"{cwd}{opened_file}")
 
 
 def write_at(text, at):
-    orig_text = data_store.read_file(f"{cwd}{opened_file}").decode()
-    at = min(int(at), len(orig_text))
-    data_store.update_file(orig_text[:at] + text.encode(), f"{cwd}{opened_file}")
+    orig_data = data_store.read_file(f"{cwd}{opened_file}").decode()
+    data_store.update_file(orig_data[:int(at)] + text.encode(), f"{cwd}{opened_file}")
 
 
 def read():
@@ -137,11 +136,16 @@ def read():
 
 
 def move_within_file(start, size, target):
-    print("move_within_file")
+    orig_data = data_store.read_file(f"{cwd}{opened_file}")
+    data_to_move = orig_data[int(start):int(start)+int(size)]
+    updated_data = orig_data[:int(target)]
+    + data_to_move + orig_data[int(target) + int(size):]
+    data_store.update_file(updated_data, f"{cwd}{opened_file}")
 
 
 def truncate_file(max_size):
-    print("truncate_file")
+    orig_data = data_store.read_file(f"{cwd}{opened_file}")
+    data_store.update_file(orig_data[:int(max_size)], f"{cwd}{opened_file}")
 
 
 def show_mem_map():
