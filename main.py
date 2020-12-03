@@ -130,7 +130,7 @@ def write_append():
 def write_at():
     text = input("Enter text: ")
     at = int(input("Enter start location: "))
-    orig_data = data_store.read_file(f"{cwd}{opened_file}").decode()
+    orig_data = data_store.read_file(f"{cwd}{opened_file}")
     data_store.update_file(orig_data[:int(at)] + text.encode(), f"{cwd}{opened_file}")
 
 
