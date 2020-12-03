@@ -9,7 +9,7 @@ The first byte is used as a set of flags. Only one flag is used as of now to ind
 If the block is not the last block, the second byte directs us to the next block we need to complete our file. If the block is indeed the last block, the next byte tells us how many bytes inside that block are actually used by the file.
 
 ## Capacity
-Since we are using only a single byte to refer to the next block and each block has a size of 256 bytes, we can have a maximum capacity of
+Since we are using only a single byte to refer to the next block (we can configure to use more) and each block has a size of 256 bytes, we can have a maximum capacity of
 256 x 256 = 65536 bytes with this configuration. The limit is set to this number because if we were to save only one very large file, this would be the file size limit for that file.
 
 We need also keep in mind that not all this space is usable as some space is used by the headers and some space will be used by the descriptor table (explained below).
@@ -25,11 +25,11 @@ BYTE 0 in the first 3 blocks tell us that this block is not the last block in ou
 
 After reading this data we can merge the bytes and decode them.
 
-## Descriptor
+## Descriptor File
 The descriptor is a special file that every instance of this file system will have. It is always assigned the first block in the storage and contains information about what files and directories exist and where in our storage. There is also information about which blocks are *dead blocks* i.e. had a file saved in them in the past but are now not used. This is useful information to assign blocks to new file and avoid defragmentation. Below is an example of a descriptor file.
 
 ```
------- Descriptor Block -------
+------ Descriptor File -------
 
 Index:
 {
@@ -45,7 +45,7 @@ Dead Block IDs: [1, 7, 9]
 
 Largest Used Block ID: 12
 
---- End of Descriptor Block ---
+--- End of Descriptor File ---
 ```
 
 This descriptor shows us the files and directories we have (directories don't have have blocks assigned to them, they are essentially just meta-data). The dead block IDs array tells us that block 1, 7 and 9 are available for use. We can also see that the largest block used so far is 12. In case we run out of dead blocks we will use block 13 for the next file.
