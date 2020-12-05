@@ -82,11 +82,13 @@ class DataStore:
         self.save_block_sequence(block_sequnce, starting_addr)
 
 
+    def sequential_read(self, starting_addr):
+        block_sequnce = self.load_block_sequnce(starting_addr)
+        return b"".join([block.get_data() for block in block_sequnce])
+
+
     def load_descriptor(self):
-        descriptor_block_sequnce = self.load_block_sequnce(0)
-        self.descriptor = Descriptor.load(
-            b"".join([block.get_data() for block in descriptor_block_sequnce])
-        )
+        self.descriptor = Descriptor.load(self.sequential_read(0))
 
 
     def create_file(self, data, path):
@@ -106,8 +108,7 @@ class DataStore:
 
 
     def read_file(self, path):
-        block_sequnce = self.load_block_sequnce(self.descriptor.get_address(path))
-        return b"".join([block.get_data() for block in block_sequnce])
+        return self.sequential_read(self.descriptor.get_address(path))
 
 
     def update_file(self, data, path):
