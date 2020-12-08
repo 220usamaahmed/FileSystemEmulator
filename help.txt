@@ -2,20 +2,20 @@ The following functions are implemented
 
 --- --- --- 
 
-1. help         Provides help, you are viewing this here.
-
-2. create       create <filename>
-
-3. delete       delete <filename>
-
-4. mkdir        mkdir <dirname>
-
-5. chdir        chdir <dirname>
-
-6. move         move <source_filepath> <destination_filepath>
-
-7. open-file    open-file <filename>
-
-8. close-file   Closes the opened file.
-
-12. exit        Exits.
+ 1. help                Provides help, you are viewing this here
+ 2. create              Create new file, create <file_name>
+ 3. del                 Delete file, del <file_name>
+ 4. ls                  List current directory's contents
+ 5. mkdir               Make new directory, mkdir <directory_name>
+ 6. cd                  Change directory, cd <directory_name>
+ 7. mv                  Move file, mv <file_name> <absolute_destination_path>
+ 8. open                Open file.
+ 9. close               Close opened file.
+10. append              File Operation, append bytes
+11. write               File Operation, write bytes
+12. read                File Operation, prints data
+13. move-within         File Operation, moves bytes.
+14. truncate            File Operation, truncates bytes
+15. show-mem-usage      Show Block Manager's data
+16. clear               Clear CLI Screen
+17. exit                Exit
