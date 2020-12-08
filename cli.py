@@ -63,7 +63,6 @@ def help():
 
 
 def create(file_name):
-    print(cwd[-1])
     data_store.create_file(cwd[-1], file_name, b"")
 
 
@@ -72,7 +71,6 @@ def delete(file_name):
 
 
 def list_contents():
-    print(cwd[-1])
     print("\t".join([f"\u001b[32m{f}\u001b[0m" for f in cwd[-1].list_files()]
         + [f"\u001b[33m{d}\u001b[0m" for d in cwd[-1].list_sub_directories()]))
 
