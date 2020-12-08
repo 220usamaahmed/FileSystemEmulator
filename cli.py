@@ -76,7 +76,7 @@ def list_contents():
 
 
 def mkdir(directory_name):
-    print(data_store.create_directory(cwd[-1], directory_name))
+    data_store.create_directory(cwd[-1], directory_name)
 
 
 def chdir(directory_name):
