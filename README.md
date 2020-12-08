@@ -26,20 +26,10 @@ BYTE 0 in the first 3 blocks tell us that this block is not the last block in ou
 After reading this data we can merge the bytes and decode them.
 
 ## Descriptor File
-The descriptor is a special file that every instance of this file system will have. It is always assigned the first block in the storage and contains information about what files and directories exist and where in our storage. There is also information about which blocks are *dead blocks* i.e. had a file saved in them in the past but are now not used. This is useful information to assign blocks to new file and avoid defragmentation. Below is an example of a descriptor file.
+The descriptor is a special file that every instance of this file system will have. It is always assigned the first block in the storage and contains information about which blocks are *dead blocks* i.e. had a file saved in them in the past but are now not used. This is useful information to assign blocks to new file and avoid defragmentation. Below is an example of a descriptor file.
 
 ```
 ------ Descriptor File -------
-
-Index:
-{
-    '/doc1.txt': 512, 
-    '/doc2.txt': 1024,
-    '/directory1': None,
-    '/directory1/subdirectory1': None,
-    '/directory2': None,
-    '/directory2/doc3.txt': 2048
-}
 
 Dead Block IDs: [1, 7, 9]
 
@@ -48,4 +38,4 @@ Largest Used Block ID: 12
 --- End of Descriptor File ---
 ```
 
-This descriptor shows us the files and directories we have (directories don't have have blocks assigned to them, they are essentially just meta-data). The dead block IDs array tells us that block 1, 7 and 9 are available for use. We can also see that the largest block used so far is 12. In case we run out of dead blocks we will use block 13 for the next file.
+The dead block IDs array tells us that block 1, 7 and 9 are available for use. We can also see that the largest block used so far is 12. In case we run out of dead blocks we will use block 13 for the next file.
