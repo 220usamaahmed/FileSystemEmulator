@@ -39,3 +39,13 @@ Largest Used Block ID: 12
 ```
 
 The dead block IDs array tells us that block 1, 7 and 9 are available for use. We can also see that the largest block used so far is 12. In case we run out of dead blocks we will use block 13 for the next file.
+
+## Directories
+Directories in our system are also files that contain the names and addresses of its contents which are other files and sub directories.
+
+## Project Structure
+**cli.py** Run to interact with the fily system.
+**config.py** Contains configuration constants for the data store.
+**src/data_store.py** Class that provides the API to the file system.
+**src/block.py** Abstraction for storage block.
+**src/file_typs** Our system currently supports 3 file types. Two of these (Directory and BlockManager) are needed for the internal workings of the system and the third (Generic) is intended to be used by the user to save byte streams.
