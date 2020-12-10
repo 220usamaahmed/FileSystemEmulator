@@ -51,7 +51,7 @@ def main():
                 except Exception as e: print(e)
             else:
                 print(f"{user_input[0]} takes {command[1]} arguments, " \
-                f"R{len(user_input[1:])} given.")
+                f"{len(user_input[1:])} given.")
         else:
             print(f"Command not recognized {user_input[0]}, " \
             "type help for help.")
@@ -126,7 +126,7 @@ def write_append():
 def write_at():
     if opened_file == None: raise Exception("No open file.")
     text = input("Enter text to write:")
-    at = input("Enter position:")
+    at = int(input("Enter position:"))
     opened_file.write_at(text.encode(), at)
     data_store.save_updated_file(opened_file)
 
