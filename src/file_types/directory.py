@@ -4,7 +4,7 @@ import pickle
 class Directory():
 
     def __init__(self, name=None, address=None, parent_address=None,
-        files=None, sub_directories=None):
+            files=None, sub_directories=None):
         if files == None: files = {}
         if sub_directories == None: sub_directories = {}
         self.name = name

@@ -5,7 +5,7 @@ import pickle
 class BlockManager():
 
     def __init__(self, dead_block_ids=None,
-        largest_used_id=config.INITIAL_LARGEST_USED_ID):
+            largest_used_id=config.INITIAL_LARGEST_USED_ID):
         if dead_block_ids == None: dead_block_ids = []
         self.dead_block_ids = dead_block_ids
         self.largest_used_id = largest_used_id
