@@ -136,14 +136,14 @@ def move_within_file():
     start = input("Enter start position:")
     size = input("Enter size:")
     at = input("Enter target position:")
-    opened_file.move_within(start, size, target)
+    opened_file.move_within(start, size, at)
     data_store.save_updated_file(opened_file)
 
 
 def truncate_file():
     if opened_file == None: raise Exception("No open file.")
     at = input("Enter position:")
-    opened_file.truncate(text.encode(), at)
+    opened_file.truncate(at)
     data_store.save_updated_file(opened_file)
 
 
