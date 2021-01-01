@@ -39,7 +39,7 @@ def main():
 
     while True:
         cwd_path = "/" + "/".join(list(map(lambda d: d.name, cwd[1:])))
-        prompt = f"{cwd_path}/\u001b[32m({opened_file})\u001b[0m> " if opened_file \
+        prompt = f"{cwd_path} - \u001b[32m({opened_file})\u001b[0m> " if opened_file \
         else f"{cwd_path}> "
         user_input = input(prompt).split(" ")
         if user_input[0] == "": continue
@@ -149,6 +149,7 @@ def truncate_file():
 
 def show_mem_map():
     print(data_store.block_manager)
+    os.system(f"hexdump -v -C {config.DATA_STORE}")
 
 
 def clear():
